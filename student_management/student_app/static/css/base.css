@@ -1,0 +1,155 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Navigation Bar Styling */
+nav {
+    background-color: #333;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #575757;
+    transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+/* Content Styling (Margin from Navbar and Padding) */
+.content {
+    margin-top: 10px;  /* Reduce margin-top to bring content closer to the navbar */
+    padding: 20px;
+}
+
+/* Header Styling */
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Add Student Button */
+.add-button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px; /* Space between the button and the table */
+    display: inline-block;
+    text-align: center;
+}
+
+.add-button:hover {
+    background-color: #45a049;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px; /* Reduce margin-top to bring the table closer */
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Header Styling */
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* General Button Styles */
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    margin: 5px;
+}
+
+/* Delete Button Styles */
+.delete-btn {
+    background-color: #ff4d4d; /* Soft red */
+    color: white;
+    box-shadow: 0 4px 6px rgba(255, 77, 77, 0.3); /* Soft shadow */
+}
+
+.delete-btn:hover {
+    background-color: #e60000; /* Vibrant red on hover */
+    transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+/* Edit Button Styles */
+.edit-btn {
+    background-color: #4CAF50; /* Soft green */
+    color: white;
+    box-shadow: 0 4px 6px rgba(76, 175, 80, 0.3); /* Soft shadow */
+}
+
+.edit-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+/* Empty State Message Styling */
+tr.empty-state td {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+/* Button Container Styling */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Subject List{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>Subject List</h1>
+
+    <!-- Add New Subject Button -->
+    <a href="{% url 'add_subject' %}" class="btn add-button">Add New Subject</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Subject ID</th>
+                <th>Subject Name</th>
+                <th>Course</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <td>{{ subject.subject_id }}</td>
+                <td>{{ subject.name }}</td>
+                <td>{{ subject.course.course_name }}</td>
+                <td>
+                    <a href="{% url 'edit_subject' subject.subject_id %}" class="btn edit-btn">Edit</a>
+                    <form action="{% url 'delete_subject' subject.subject_id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn delete-btn">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No subjects available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

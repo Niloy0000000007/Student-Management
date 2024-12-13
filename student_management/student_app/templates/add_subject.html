@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Subject</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/add_subject.css' %}">
+</head>
+<body>
+    <h1>Add Subject</h1>
+
+    <!-- Form to add a new subject -->
+    <form action="{% url 'add_subject' %}" method="POST">
+        {% csrf_token %}
+        
+        <!-- Render the form fields dynamically -->
+        <div>
+            <label for="subject_id">Subject ID:</label>
+            {{ form.subject_id }}
+        </div>
+        
+        <div>
+            <label for="subject_name">Subject Name:</label>
+            {{ form.name }}
+        </div>
+        
+        <div>
+            <label for="course">Course:</label>
+            {{ form.course }}
+        </div> <br>
+        
+        <button type="submit">Add Subject</button>
+
+        <!-- Back to Subject List Button -->
+        <a href="{% url 'subject_list' %}" class="back-link">Back to Subject List</a>
+    </form>
+</body>
+</html>

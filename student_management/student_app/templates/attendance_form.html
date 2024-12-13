@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Form</title>
+    <link rel="stylesheet" href="{% static 'css/attendance_form.css' %}">
+    <script>
+        async function loadAttendanceForm() {
+    const subjectSelect = document.getElementById('subject');
+    const subjectId = subjectSelect.value;
+    const attendanceForm = document.getElementById('attendance-form');
+    const tableBody = document.getElementById('attendance-table-body');
+
+    if (subjectId) {
+        // Update hidden subject input with the selected subject ID
+        document.getElementById('selected_subject').value = subjectId;
+
+        // Show the form
+        attendanceForm.style.display = 'block';
+
+        // Fetch students for the selected subject
+        const response = await fetch(`/get_students_by_subject/${subjectId}/`);
+        const students = await response.json();
+
+        // Clear existing rows
+        tableBody.innerHTML = '';
+
+        // Populate table with students
+        students.forEach(student => {
+            const row = `
+                <tr>
+                    <td>${student.id}</td>
+                    <td>${student.first_name} ${student.last_name}</td>
+                    <td>${student.course}</td>
+                    <td>
+                        <input type="radio" name="attendance_${student.id}" value="present" required>
+                    </td>
+                    <td>
+                        <input type="radio" name="attendance_${student.id}" value="absent">
+                    </td>
+                </tr>`;
+            tableBody.innerHTML += row;
+        });
+    } else {
+        // Hide the form if no subject is selected
+        attendanceForm.style.display = 'none';
+    }
+}
+
+    </script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'student_list' %}">Students</a></li>
+            <li><a href="{% url 'subject_list' %}">Subjects</a></li>
+            <li><a href="{% url 'course_list' %}">Courses</a></li>
+            <li><a href="{% url 'attendance_form' %}">Attendance Form</a></li>
+            <li><a href="{% url 'attendance_records' %}">Attendance Records</a></li>
+            <li><a href="{% url 'login' %}">Log Out</a></li>
+        </ul>
+    </nav>
+    <div class="form-container">
+        <h1>Student Attendance</h1>
+        
+        <!-- Subject Dropdown -->
+        <label for="subject">Select Subject:</label>
+        <select name="subject" id="subject" onchange="loadAttendanceForm()" required>
+            <option value="">-- Select Subject --</option>
+            {% for subject in subjects %}
+                <option value="{{ subject.id }}">{{ subject.name }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Attendance Form -->
+        <form action="/submit_attendance/" method="POST" id="attendance-form" style="display: none;">
+            {% csrf_token %}
+            <!-- Hidden Subject ID -->
+            <input type="hidden" name="selected_subject" id="selected_subject">
+
+            <!-- Attendance Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Course</th>
+                        <th>Present</th>
+                        <th>Absent</th>
+                    </tr>
+                </thead>
+                <tbody id="attendance-table-body">
+                    <!-- Students will be dynamically loaded here -->
+                </tbody>
+            </table>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-submit">Submit Attendance</button>
+        </form>
+    </div>
+</body>
+</html>

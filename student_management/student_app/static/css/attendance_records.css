@@ -1,0 +1,131 @@
+/* Styles for the body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding-top: 80px; /* Adjust for fixed navbar */
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Navbar Styling */
+nav {
+    background-color: #333;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #575757;
+    transform: scale(1.05);
+}
+
+/* Styles for the heading */
+h1 {
+    text-align: center;
+    color: #444;
+    margin-top: 5px; /* Added margin to place below the navbar */
+    font-size: 2rem;
+}
+
+/* Styles for the form */
+form {
+    text-align: center;
+    margin-top: 40px; /* Add spacing below the navbar */
+}
+
+/* Subject Selection Form */
+.select-container {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Styles for the table */
+table {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table headers */
+th {
+    background-color: #007bff;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 12px;
+}
+
+/* Table cells */
+td {
+    background-color: #fff;
+    padding: 12px;
+    text-align: center;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+}
+
+/* Alternate row background color */
+tbody tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+/* Hover effect for rows */
+tbody tr:hover {
+    background-color: #e2e6ea;
+}
+
+/* Make sure form and table have proper spacing */
+form, table {
+    margin-top: 40px; /* Add spacing below the form */
+}

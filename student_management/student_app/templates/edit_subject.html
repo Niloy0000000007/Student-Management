@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Subject</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/edit_subject.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{% if form.instance.subject_id %}Edit Subject{% else %}Add New Subject{% endif %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">{% if form.instance.subject_id %}Save Changes{% else %}Add Subject{% endif %}</button>
+        </form>
+        <a href="{% url 'subject_list' %}" class="back-link">Back to Subject List</a>
+    </div>
+</body>
+</html>

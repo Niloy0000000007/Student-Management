@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    {% load static %}
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="{% static 'css/edit_student.css' %}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const courseField = document.getElementById("id_course");
+        const subjectField = document.getElementById("id_subject");
+    
+        // Handle course change event
+        courseField.addEventListener("change", function () {
+            const courseId = this.value;
+    
+            // Reset subject field if no course is selected
+            if (!courseId) {
+                subjectField.disabled = true;
+                subjectField.innerHTML = "<option value=''>Select a subject</option>";
+                return;
+            }
+    
+            // Enable the subject field and populate it based on the selected course
+            subjectField.disabled = false;
+            subjectField.innerHTML = "<option value=''>Loading subjects...</option>"; // Temporary message
+    
+            fetch(`/get_subjects_by_course/${courseId}/`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch subjects.");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    subjectField.innerHTML = ""; // Clear previous options
+                    const defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.textContent = "Select a subject";
+                    subjectField.appendChild(defaultOption);
+    
+                    if (data.length === 0) {
+                        // Handle case when no subjects are available
+                        const noSubjectsOption = document.createElement("option");
+                        noSubjectsOption.value = "";
+                        noSubjectsOption.textContent = "No subjects available";
+                        subjectField.appendChild(noSubjectsOption);
+                    } else {
+                        // Populate with fetched subjects
+                        data.forEach((subject) => {
+                            const option = document.createElement("option");
+                            option.value = subject.id;
+                            option.textContent = subject.name;
+                            subjectField.appendChild(option);
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching subjects:", error);
+                    subjectField.disabled = true;
+                    subjectField.innerHTML = "<option value=''>Error loading subjects</option>";
+                });
+        });
+    });
+    
+    
+        </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Student</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Save Changes</button>
+            <!-- Back Link Inside the Form Container -->
+            <a href="{% url 'student_list' %}" class="back-link">Back to Student List</a>
+        </form>
+    </div>
+</body>
+</html>

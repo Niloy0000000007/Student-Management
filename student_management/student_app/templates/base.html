@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Management{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"> <!-- Link to your main CSS -->
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'student_list' %}">Students</a></li>
+            <li><a href="{% url 'subject_list' %}">Subjects</a></li>
+            <li><a href="{% url 'course_list' %}">Courses</a></li>
+            <li><a href="{% url 'attendance_form' %}">Attendance Form</a></li>
+            <li><a href="{% url 'attendance_records' %}">Attendance Records</a></li>
+            <li><a href="{% url 'login' %}">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        {% block content %} <!-- Content section will be overridden in child templates -->
+        {% endblock %}
+    </div>
+
+</body>
+</html>
